@@ -1,3 +1,14 @@
-from django.shortcuts import render
+import requests
+import json
+from django.http import HttpResponse
 
-# Create your views here.
+def countries_stat(request):
+    
+    data = {
+            'status':'ok',
+            'country':'colombia',
+        }
+
+    return HttpResponse(json.dumps(data))
+
+
