@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse
 
 
-def countries_stat(request):
+def countries_stat(request,country):
         #  URL´s to use
     url = 'https://brp.com.np/covid/country.php'
     world_data_url = 'https://brp.com.np/covid/alldata.php'
