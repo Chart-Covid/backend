@@ -7,7 +7,7 @@ def countries_stat(request):
         #  URL´s to use
     url = 'https://brp.com.np/covid/country.php'
     world_data_url = 'https://brp.com.np/covid/alldata.php'
-
+        # it fetches all world data
     
     r = requests.get(world_data_url).json()
     
