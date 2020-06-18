@@ -1,3 +1,4 @@
 django>=3.0.7
 gunicorn
-requests==2.22.0
+djangorestframework
+requests
