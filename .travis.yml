@@ -1,0 +1,35 @@
+language: python
+python:
+  - "3.7"
+  
+install:
+  - pip install -r requirements.txt
+
+script:
+  - pytest test.py
+  
+git:
+  depth: 3
+
+branches:
+  only:
+  -master
+  
+notifications:
+    email:
+        recipients:
+            - kasuru@hotmail.com
+            - jaso_98@hotmail.com
+        on_success: always
+        on_failure: always
+
+deploy:
+    provider: heroku
+    skip-cleanup: true
+    keep-history: true
+    api_key: 
+        secure: "faDY8ZPsro7Frp8QJ2LzqDtWcyCJ2iC2Gd9OVv5Rx3ifEWb00XDpqJ1xpMPh6MLg0CkfAuFbsmsl6NbhOpRhrirqJyXi5pCgdl+g1yUocVByZOGXecPXot0Gfr63LWCVUC9ybmUayJGw00fvC1S9Vi/0YHKIcuftlzwwbYybKpe1gm+VQariqo0dIYDcxsIM7UxjnbJswFoT/vjVr5Pp4gXGoxa8AFOC7oQ/TOrwaO/MUup0hPsL7hMGJ9A6xRjDb21kckRKiDQUL9QKrIHBHv//XlUiZqpFUjAoDiro35meYCKyH516ebR/X84qSnkSx3jGj2ILRSQEB4gFPKmbCBnIXA8k5UDLKPk9BnUEqjlHga/3oEzOymPoAk9rm5+TAl0gmVBMXz3aEeTtY5SMlETT4L8CIbB/w3iw0LqC6uKRNI4ucss+Qu6kgi2Mf8ec5qVtnllGJ2U7xR/IeMcNBhDeZnHSvh4QOgnWs5VYtwKrRqM7g6aRfWfQamX7y8eqmsmYiwfXzLm97NoehzVrPwuif8e5WeBlUlNCWZOBEQEGmgir1RzYAhwrCin+OkzoDRZDZXfj6XOlf4vj5C+NwfdTbzxqkZ0xMobPD4Up2I3MB2SUHsiZHHQBo+KoAGLLehRvtlXEYEnS2y+gKKKwz+2R0WNZsZUkr6yiDvAG/tg="
+
+    app: chart-covid
+    on:
+      repo: Chart-Covid/backend
