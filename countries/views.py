@@ -2,14 +2,12 @@ import requests
 import json
 from django.http import HttpResponse
 
+#  URL´s to use
+URL = 'https://brp.com.np/covid/country.php'
+WORLD_DATA_URL = 'https://brp.com.np/covid/alldata.php'
 
 def countries_stat(request):
-        #  URL´s to use
-    url = 'https://brp.com.np/covid/country.php'
-    world_data_url = 'https://brp.com.np/covid/alldata.php'
-
-    
-    r = requests.get(world_data_url).json()
+    r = requests.get(WORLD_DATA_URL).json()
     
     # It fetches total cases in the world
     world_total_data = {
@@ -21,14 +19,14 @@ def countries_stat(request):
     }
 
 
-    r = requests.get(url).json()
+    r = requests.get(URL).json()
     length = len(r['countries_stat'])
     actual_length = length + 1
     world_data = []
 
         # Number 14 is Mexico
     for i in range(0,14):
-        r = requests.get(url).json()
+        r = requests.get(URL).json()
 
         data_covid = {
                 'country_name':r['countries_stat'][i]['country_name'],
@@ -53,7 +51,6 @@ def countries_stat(request):
 
 
         #It returns every data from a single country
-    return HttpResponse(json.dumps([world_total_data, data_covid]))
+    return HttpResponse(json.dumps(data_covid))
     
-
-
+    
