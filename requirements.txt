@@ -3,3 +3,6 @@ gunicorn
 djangorestframework
 requests
 django-cors-headers
+pandas
+beautifulsoup4
+
