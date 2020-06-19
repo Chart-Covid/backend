@@ -41,5 +41,5 @@ def top_ten(request):
     df.columns = column_names
 
     total = df.head(10).to_json()
-    print(total)
+    
     return HttpResponse(total)
