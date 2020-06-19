@@ -1,2 +1,7 @@
 django>=3.0.7
 gunicorn
+djangorestframework
+requests
+django-cors-headers
+pandas
+beautifulsoup4
