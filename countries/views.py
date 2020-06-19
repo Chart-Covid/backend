@@ -6,9 +6,9 @@ from django.http import HttpResponse
 URL = 'https://brp.com.np/covid/country.php'
 WORLD_DATA_URL = 'https://brp.com.np/covid/alldata.php'
 
-def countries_stat(request):
+def countries_stat(request, country):
     r = requests.get(WORLD_DATA_URL).json()
-    
+       
     # It fetches total cases in the world
     world_total_data = {
         'total_cases':r['total_cases'],
