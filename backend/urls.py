@@ -1,8 +1,7 @@
 from django.urls import path
 from countries import views as countries_views
-from countries import top_ten
-from countries import lon_lat_data
-from countries import show_countries
+from countries import top_ten, lon_lat_data, show_countries
+
 
 urlpatterns = [
     path('show_countries/', show_countries.show_countries),
