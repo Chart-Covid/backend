@@ -3,6 +3,10 @@ gunicorn
 djangorestframework
 requests
 django-cors-headers
+numpy
+scipy
+scikit-learn
 pandas
+lxml
 beautifulsoup4
 
