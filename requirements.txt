@@ -9,4 +9,7 @@ scikit-learn
 pandas
 lxml
 beautifulsoup4
-
+lxml
+numpy
+scipy
+scikit-learn
