@@ -3,74 +3,59 @@ import bs4
 import json
 from django.http import HttpResponse
 
-# It does not need pandas
-
-# It looks for a country you enter
-<<<<<<< Updated upstream
-#country_name=input("Enter the Country name: ")
 
 def show_countries(request, country):
     res = requests.get("https://www.worldometers.info/coronavirus/#countries")
     soup = bs4.BeautifulSoup(res.text, 'lxml')
-    index = -1
-    """
-
-
-    """
-    data=""
-    print("-----------------------------")
-    print("data")
-    
-
-    data_country = {
-        "country_name":country,
-        "total_cases":country,
-        "new_cases":country,
-        "total_deaths":country,
-        "new_deaths":country,
-        "total_Recovered":country,
-        "active_cases":country,
-    }
-
-    print(data_country)
-
-    return HttpResponse(json.dumps(data_country))
-=======
-# country_name=input("Enter the Country name: ")
-
-def show_countries(requests, country):
-    res = requests.get("https://www.worldometers.info/coronavirus/#countries")
-    soup = bs4.BeautifulSoup(res.text, 'lxml')
-    index = -1
     data=soup.select('tr td')
+
+    index = find_country(data,country)
+
+    if index == -1:
+        print("This country does not exist\n\n")
+    else:
+        dic = load_country_data(data, index)
+        print_country_data(dic)
+
+
+def find_country(data, country):
+    if country.lower() == "world":
+        country = "Total:"
+
     for i in range(len(data)):
         if data[i].text.lower()==country.lower():
-            index=i
-            break
+            return i
+    return -1
 
-    for i in range(7):
-        if i == 0:
-            print("\nCountry name: "+str(data[i+index].text))
-        elif i == 1:
-            print("Total cases: "+str(data[i+index].text))
-        elif i == 2:
-            if data[i+index].text == '':
-                print("New cases: 0")
-            else:
-                print("New cases: "+str(data[i+index].text))
-        elif i == 3:
-            print("Total deaths: "+str(data[i+index].text))
-        elif i == 4:
-            if data[i+index].text == '':
-                print("New deaths: 0")
-            else:
-                print("New deaths: "+str(data[i+index].text))
-        elif i == 5:
-            print("Total Recovered: "+str(data[i+index].text))
-        elif i == 6:
-            print("Active cases: "+str(data[i+index].text),end='\n\n')
 
-        print(country)
-        
-# show_countries(country_name)
->>>>>>> Stashed changes
+def load_country_data(data, index):
+    dic = {'name': data[index].text,
+            'total_cases': get_int(data[index+1].text),
+            'new_cases': get_int(data[index+2].text),
+            'tot_deaths': get_int(data[index+3].text),
+            'new_deaths': get_int(data[index+4].text),
+            'recovered': get_int(data[index+5].text),
+            'active': get_int(data[index+6].text)}
+    return dic
+
+
+def get_int(str):
+    s = str.strip()
+    return int(s.replace(',','').replace('+','')) if s else 0
+
+def print_country_data(country_data):
+    print("Found \n")
+    print(country_data['name'])
+    print('=' * len(country_data['name']))
+
+    print("Total Cases : {0:9,d}".format(country_data['total_cases']))
+    print("New Cases : {0:+9,d}".format(country_data['new_cases']))
+
+    print("Total Deaths : {0:9,d}".format(country_data['tot_deaths']))
+    print("New Deaths : {0:+9,d}".format(country_data['new_deaths']))
+
+    print("Total Recovered: {0:9,d}".format(country_data['recovered']))
+    print("Active Cases : {0:9,d}".format(country_data['active']))
+
+
+    return HttpResponse(json.dumps(show_countries, load_country_data, print_country_data, get_int, find_country))
