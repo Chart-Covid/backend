@@ -4,6 +4,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
 
+
 URL_COVID = 'https://www.worldometers.info/coronavirus/'
 
 def top_ten(request):
