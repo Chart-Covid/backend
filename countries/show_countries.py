@@ -21,7 +21,7 @@ def show_countries(request, country):
     print("data")
     
 
-    data_country = {
+    data_country = { 
         "country_name":country,
         "total_cases":7342359,
         "new_cases":31527,
